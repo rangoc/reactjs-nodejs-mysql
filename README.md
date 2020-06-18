@@ -54,7 +54,7 @@ Last but not least, run the following two commands from client path in your term
 
 
 That's all folks!<br/>
-![Looney Tunes](https://cinemagixblog.files.wordpress.com/2013/02/thatsallfolks.jpg)
+![Looney Tunes](https://media.giphy.com/media/5IT69msgpaOcg/giphy.gif)
 
 
 
