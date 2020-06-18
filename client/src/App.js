@@ -17,12 +17,11 @@ class FixedColumnTable extends React.Component {
       data: [],
     };
   }
-  handleToUpdate= (updatedData) => {
-    this.setState({ data: updatedData })
-  } 
-
+  handleToUpdate = (updateData) => {
+    this.setState({ data: updateData });
+  }
   callServer() {
-   fetch("http://localhost:9000/")
+   fetch('') // enter the url of your application load balancer
         .then(res => res.json())
         .then(res =>  this.setState({ data: res }))
         .catch(err => err);
@@ -34,7 +33,7 @@ class FixedColumnTable extends React.Component {
   }
   
   render() {
-    var handleToUpdate  =  this.handleToUpdate;
+    var handleToUpdate = this.handleToUpdate;
     return (
       <div>
         <Table
@@ -71,7 +70,7 @@ class FixedColumnTable extends React.Component {
               {rowData => {
                 return (
                   <span>
-                    <Details details ={rowData}/>
+                    <Details details={rowData}/>
                     <Edit details={rowData} handleToUpdate = {handleToUpdate.bind(this)} data={this.state.data}/>
                     <Remove details={rowData} handleToUpdate = {handleToUpdate.bind(this)} data={this.state.data}/>
                   </span>

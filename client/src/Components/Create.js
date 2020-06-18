@@ -6,6 +6,7 @@ class Create extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
+        answer: '', 
         formValue: {
           ime: '',
           prezime: '',
@@ -51,9 +52,9 @@ class Create extends React.Component {
         "Datum_rodjenja" : this.state.formValue.datumRodjenja,
         "JMBG" : this.state.formValue.jmbg
       });  
-      console.log(this.props.data);
       handleToUpdate(this.props.data);
     }
+    
     resetForm() {
       this.setState({
         formValue: {
@@ -70,21 +71,19 @@ class Create extends React.Component {
         }
       });
     }
+
     handleSubmit = (event) => {
-      this.updateData();
-      this.resetForm();
-      this.close();
-      fetch('http://localhost:9000/post', {
+      fetch('', {  // enter the url of your application load balancer inside of ''
           method: 'POST',
           // We convert the React state to JSON and send it as the POST body
           body: JSON.stringify(this.state.formValue),
           headers: {
             "Content-Type": "application/json"
         }
-        }).then(function(response) {
-          console.log(response)
-          return response.json();
-        });
+        }).then(res => this.close())
+          .then(res => this.updateData())
+          .then(res => this.resetForm());
+        
         event.preventDefault();  
     }
     render() {
@@ -146,7 +145,7 @@ class Create extends React.Component {
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={this.handleSubmit} appearance="primary" color="green">
+              <Button onClick={this.handleSubmit} name="yes" appearance="primary" color="green">
                 Snimi
               </Button>
               <Button onClick={this.close} appearance="subtle">

@@ -6,7 +6,7 @@ class Edit extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        data:  this.props.data,
+        data: this.props.data,
         formValue: { 
           ime: this.props.details.Ime,
           prezime: this.props.details.Prezime,
@@ -31,13 +31,28 @@ class Edit extends React.Component {
     }
     open() {
       this.setState({ show: true });
+      this.setState({
+        formValue: {
+          ime: this.props.details.Ime,
+          prezime: this.props.details.Prezime,
+          email: this.props.details.Email,
+          telefon: this.props.details.Telefon,
+          adresa: this.props.details.Adresa,
+          linkedin: this.props.details.Linkedin,
+          skype: this.props.details.Skype,
+          instagram: this.props.details.Instagram,
+          datumRodjenja: this.props.details.Datum_rodjenja,
+          jmbg: this.props.details.JMBG
+        }
+      });
     }
+
     handleChange(value) {
-      console.log(value);
       this.setState({
         formValue: value
       });
     }
+    
     updateData() { 
       var handleToUpdate = this.props.handleToUpdate;
       for( var i =0; i < this.props.data.length; i++) { 
@@ -54,27 +69,17 @@ class Edit extends React.Component {
           this.props.data[i].JMBG = this.state.formValue.jmbg;
         }
       }
-      this.setState({data: this.props.data});
-      console.log(this.state.data);
-      console.log(this.props.data);
-      handleToUpdate(this.props.data);
-  }
-    
+      handleToUpdate(this.props.data);    
+    }
+
     handleSubmit = (event) => {
-      this.updateData();
-      fetch('http://localhost:9000/put', {
+      fetch('', { // enter the url of your application load balancer inside of ''
           method: 'PUT',
           // We convert the React state to JSON and send it as the POST body
           body: JSON.stringify(this.state.formValue),
           headers: {"Content-Type": "application/json"}
-        })
-        .then(function(response) {
-          console.log(response)
-          return response.json();
-        }).then(function(body){
-          console.log(body);
-        });
-        this.close();
+        }).then(res => this.close())
+          .then(res => this.updateData());
         event.preventDefault();  
     }
     

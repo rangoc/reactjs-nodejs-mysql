@@ -12,12 +12,15 @@ class Remove extends React.Component {
       this.open = this.open.bind(this);
       this.updateData = this.updateData.bind(this);
     }
+    
     close() {
       this.setState({ show: false });
     }
+    
     open() {
       this.setState({ show: true });
     }
+    
     updateData() { 
       var handleToUpdate = this.props.handleToUpdate;
       for( var i =0; i < this.props.data.length; i++) { 
@@ -26,26 +29,22 @@ class Remove extends React.Component {
           break;
         }
       }  
-      console.log(this.state.data);
-      handleToUpdate(this.props.data);
-      
-  }
+      handleToUpdate(this.props.data);   
+    }
+    
     handleSubmit = (event) => {
-      this.updateData();
-      this.close();
-      fetch('http://localhost:9000/delete', {
+      fetch('', { // enter the url of your application load balancer inside of ''
           method: 'DELETE',
           // We convert the React state to JSON and send it as the POST body
           body: JSON.stringify(this.props.details),
           headers: {
             "Content-Type": "application/json"
         }
-        }).then(function(response) {
-          console.log(response)
-          return response.json();
-        });
+        }).then(res => this.close())
+          .then(res => this.updateData());
         event.preventDefault();  
     }
+    
     render() {
       return (
         <React.Fragment>
