@@ -8,7 +8,7 @@
 
 ### Application description: 
 
-Simple CRUD application, front-end built by using React, back-end by using NodeJS and for database MySQL was used. On front-end  table is displaying list of users from MySQL database and there are options for creating, updating, deleting the users and also getting their details. Table is primarily showing specific number of columns, while details, create and edit form give an insight into all the attributes that one user is supposed to have.
+CRUD application, front-end built by using React, back-end by using NodeJS and for database MySQL was used. On front-end  table is displaying list of users from MySQL database and there are options for creating, updating, deleting the users and also getting their details. Table is primarily showing specific number of columns, while details, create and edit form give an insight into all the attributes that one user is supposed to have.
 
 ### Get it up & running: 
 
